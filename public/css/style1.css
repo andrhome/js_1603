@@ -2,3 +2,6 @@ p{
 	color: #999;
 	margin-bottom: 10px;
 }
+p:hover{
+    color: #f00;
+}
