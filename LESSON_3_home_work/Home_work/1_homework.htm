@@ -1,0 +1,102 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>Работа с узлами DOM_HW_Andrey</title>
+</head>
+<style>
+    #list{width: 200px;}   
+    input{
+        width: 220px;
+        height: 30px;
+        margin-bottom: 7px;
+    }
+    li{margin-bottom: 10px;}
+</style>
+<body>
+    <ul id="list">
+        <li>Lorem ipsum dolor sit amet 1.</li>
+        <li>Lorem ipsum dolor sit amet 2.</li>
+        <li>Lorem ipsum dolor sit amet 3.</li>
+        <li>Lorem ipsum dolor sit amet 4.</li>
+        <li>Lorem ipsum dolor sit amet 5.</li>
+    </ul>
+    <br />
+    <input type="button" onclick="getFirstListElem()" value="Выбрать первый элемент" /><br />
+    <input type="button" onclick="getLastListElem()" value="Выбрать последний элемент" /><br />
+    <input type="button" onclick="getNextListElem()" value="Выбрать следующий элемент" /><br />
+    <input type="button" onclick="getPrevListElement()" value="Выбрать предыдущий элемент" /><br />
+    <input type="button" onclick="addNewElem()" value="Добавить элемент" /><br />
+    <input type="button" onclick="removeElem()" value="Удалить элемент" /><br />
+    <input type="button" onclick="addElemToStart()" value="Добавить  в начало" /><br />
+        
+    <script>
+        var ul = document.getElementById('list');
+        
+        function getFirstListElem() {
+            var firstElem = ul.firstElementChild;
+            firstElem.style.backgroundColor = "#0f0";
+        };
+        
+        function getLastListElem() {
+            var lastElem = ul.lastElementChild;
+            lastElem.style.backgroundColor = "#0f0";
+        };
+        
+        function resetBackground() {
+            var li = ul.children;
+            for (var i = 0; i < li.length; i++) {
+                li[i].style.backgroundColor = '#fff';   
+            };
+        };
+        
+        var a = 0;
+        var x = 0;
+        function getNextListElem() {
+            
+            resetBackground();  
+            
+            var li = ul.children;
+            li[a].style.backgroundColor = "#f00";
+            x = a;
+            a++;
+            
+            if ( li[a] == undefined ) {
+                return a = 0;
+            };
+        };
+       
+        function getPrevListElement() {
+            
+            resetBackground();
+            
+            var li = ul.children;
+            li[x].style.backgroundColor = "#f00";
+            x--;
+            
+            if (li[x] == undefined ) {
+                var b = li.length - 1;
+                return x = b;
+            }; 
+            
+        };
+        
+        function addNewElem() {
+            var newElem = document.createElement('li');
+            newElem.innerHTML = "New element";
+            ul.appendChild(newElem);
+        };
+        
+        function removeElem () {
+            var liLast = ul.lastElementChild;
+            liLast.remove();
+        };
+        
+        function addElemToStart() {
+            var newElem = document.createElement('li');
+            newElem.innerHTML = "New element";
+            var firstLi = ul.firstElementChild;
+            ul.insertBefore(newElem, firstLi);
+        };
+    </script>
+</body>
+</html>
