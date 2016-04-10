@@ -18,6 +18,8 @@
         // var li5 = ul.childNodes[7];
         var li5 = ul.children[2]; // альтернатива из DOM4 не работает в ИЕ10-
         li5.insertAdjacentHTML("beforeBegin", "<li>3</li><li>4</li>");
+
+        li5.insertAdjacentHTML("afterEnd", "<li>5.1</li>")
     </script>
 </body>
 </html>
