@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Classwork</title>
+</head>
+<body>
+    <div id="one">one</div> 
+    <script>
+        
+            var divOne = document.getElementById('one');
+            divOne.insertAdjacentHTML("afterEnd", "<div id='two'>two</div>");
+
+            var twoDiv = document.getElementById('two');
+            twoDiv.onclick = function() {
+                twoDiv.insertAdjacentHTML("beforeBegin", "<div id='two-first'>two-first</div>");
+                twoDiv.id = 'two-second';
+                twoDiv.innerHTML = "two-second";
+            };
+
+    </script>
+</body>
+</html>
