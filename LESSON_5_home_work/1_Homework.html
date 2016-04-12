@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Homework_5.1</title>
+</head>
+<body>
+<!--     Создайте счетчик, который начинает отчет с 1 и заканчивается на 30, также добавьте кнопки который останавливают отчет, и запускают его заново и добавьте кнопку обнуляющую отчет. Также попробуйте изменить код так чтобы отчет начинался с 30 и заканчивался на 1. -->
+	<div id="show" style="height: 20px"></div>
+	<button type="button" onclick="counterFirst()">Отсчет с 1 до 10</button>
+	<button type="button" onclick="counterSecond()">Отсчет с 10 до 1</button>
+	<button type="button" onclick="resetCounter()">Обнулить</button>
+	<button type="button" onclick="stopCounter()">STOP!</button>
+
+	
+	<script>
+		var currentCount = 1;
+		var show = document.querySelector('#show');
+		show.innerHTML = currentCount;
+
+
+		// function counterFirst() {
+		// 	for(var i = 0; i < 30; i++) {
+		// 		currentCount++;
+		// 		show.innerHTML = currentCount;
+		// 		console.log(currentCount);
+		// 	};
+		// };
+
+		//Счетчики по клику
+		// function counterFirst() {
+		// 	if(currentCount < 30) {
+		// 		currentCount++;
+		// 		show.innerHTML = currentCount;
+		// 	} else {
+		// 		alert('Харе! Уже 30!:)');
+		// 	};
+		// };
+
+		// function counterSecond() {
+		// 	if(currentCount <= 30 && currentCount > 1) {
+		// 		currentCount--;
+		// 		show.innerHTML = currentCount;
+		// 	} else {
+		// 		alert("Стоп! Уже 1:)");
+		// 		return false;
+		// 	};
+		// };
+
+		function resetCounter() {
+			currentCount = 1;
+			show.innerHTML = currentCount;
+		};
+
+		//Автоматический счетчик
+		var stopTime;
+
+		function stopCounter() {
+			clearTimeout(stopTime);
+		};
+
+		function counterFirst() {
+			stopTime = setTimeout( function() {
+				if(currentCount < 10) {
+					currentCount++;
+					show.innerHTML = currentCount;
+
+					counterFirst();
+				} else {
+					alert('Уже 10!:)');
+				}
+			}, 500);
+		};
+
+		function counterSecond() {
+			stopTime = setTimeout( function() {
+				if(currentCount <= 10 && currentCount > 1) {
+					currentCount--;
+					show.innerHTML = currentCount;
+
+					counterSecond();
+				} else {
+					alert('Уже 1!:)');
+				};
+			}, 500);
+		};
+
+	</script>
+</body>
+</html>

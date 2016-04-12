@@ -51,16 +51,7 @@
         <li>Молоко</li>
     </ul>
     <script>
-    var allDiv = document.getElementsByTagName("div");
-    for (var i = allDiv.length - 1; i >= 0; i--) {
-        var nextDivSibling = allDiv[i].nextSibling;
-        if (nextDivSibling.nodeType != 1) {
-            nextDivSibling = nextDivSibling.nextSibling;
-        };
-        else if (nextDivSibling.tagName == "P") {
-            nextDivSibling.style.backgroundColor = "yellow";
-        };
-    };
+
 
     var allParagraphs = document.getElementsByTagName("p");
     for (var i = allParagraphs.length - 1; i >= 0; i--) {
