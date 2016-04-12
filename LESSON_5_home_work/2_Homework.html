@@ -1,0 +1,59 @@
+<!-- 
+    Запросите у пользователя ввести какую-то фразу. Отобразите каждое отдельное слово в виде списка ul li. Также отобразите первое слово UPPERCASE, а последние 2 с маленькой. Найдите все буквы "а"  их количество выведите в модальное окно. 
+ -->
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+</head>
+<body>
+	<ul id="list">
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+
+	<script>
+		var list = document.getElementById('list');
+		var li = list.children;
+
+		for(var i = 0; i < li.length; i++) {
+			var str = prompt('Enter the word!', 'bla-bla');
+			li[i].innerHTML = str;
+		};		
+		// li[0].innerHTML = str.toUpperCase();
+		// li[li.length - 1].innerHTML = str.toLowerCase();
+		
+
+		//Подсчитываем количество букв "а" в строке:
+		// 1 - заносим все введенные слова со списка в переменную string соеденяя их в одну строку;
+		// 2 - цыклом while проходим по строке string и ищем все символы "а" начиная с позиции pos, которое при каждом прохождении цыкла прибавляется на 1;
+		// 3 - создали переменную счетчик counter, которая подсчитывает количество найденных символов "а";
+		//4 - в переменную foundA записываем индекс символа "а" и проверяем если эго нет то останавливаем цыкл, а если есть прибавляем к переменной counter + 1.
+
+		var string = "";
+
+		for(var i = 0; i < li.length; i++) {
+			string += li[i].innerHTML; 
+		};
+
+		var pos = 0;
+		var counter = 0;
+
+		while(true) {
+			var foundA = string.indexOf('a', pos);
+
+			if(foundA == -1) break;
+
+			if(foundA) {
+				counter += 1;
+			}
+
+			pos = foundA + 1;
+		};
+		alert("Всего " + counter + " символов 'a'");
+
+	</script>
+</body>
+</html>
