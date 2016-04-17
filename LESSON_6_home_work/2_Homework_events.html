@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ключевое слово this</title>
+    <style>
+        div {
+            background-color:green;
+            display: inline-block;
+            height: 100px;
+            width: 100px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        var divArr = document.getElementsByTagName("div");
+        for (var i = 0; i < divArr.length; i++) {
+            divArr[i].onmouseover = function() {
+                var numb1 = Math.floor( Math.random() * 10);
+                var numb2 = Math.floor( Math.random() * 10);
+                var numb3 = Math.floor( Math.random() * 10);
+                var numb4 = Math.floor( Math.random() * 10);
+                var numb5 = Math.floor( Math.random() * 10);
+                var numb6 = Math.floor( Math.random() * 10);
+                console.log(numb1, numb2, numb3);
+                var rgb = 'rgb(1' + numb1 + numb2 + ', 1' + numb3 + numb4 + ', 1' + numb5 + numb6 + ')';
+                this.style.background = rgb;
+                this.innerHTML = rgb;
+                console.log(this.style.background);
+            };
+        };
+
+        
+        window.onbeforeunload = function(){
+            return "Are you sure?";
+        };
+        
+    </script>
+</script>
+</body>
+</html>
