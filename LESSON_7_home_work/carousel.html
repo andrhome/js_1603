@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{
+		margin: 0;
+	}
+	div{
+		width: 200px;
+		height: 200px;
+		overflow: hidden;
+	}
+	ul{
+		list-style: none;
+		padding: 0;
+		position: relative;
+	}
+	li {
+		width: 200px;
+		height: 200px;
+		float: left;
+	}
+	button{
+		display: block;
+		color: black;
+	}
+</style>
+<body>
+	<div>
+		<ul id="ul">
+			<li style="background: #ff0000">1</li>
+			<li style="background: #00ff00">2</li>
+			<li style="background: #0000ff">3</li>
+			<li style="background: #ff6455">4</li>
+		</ul>
+	</div>
+	<button type="button" id="next">next</span>
+	<button type="button" id="prev">prev</span>
+	<script>
+		var ul = document.getElementById('ul'),
+			li = ul.children,
+			liStyle = parseInt(getComputedStyle(li[0]).getPropertyValue('width')), // -Берем стили с Li, а конкретно ширину, парсим ее parseInt() чтобы преобразовать в число
+			width = liStyle * li.length; // - Берем ширину всех Li
+
+			ul.style.width = width + "px"; // - Задаем ul ширину на все Li
+
+			var limit = -(liStyle * (li.length - 1)); // - Устанавливаем лимит отступа, на который должна сдвигаться карусель (чтобы не вылезла за край списка и не показалось пустое место)
+
+			function moveNextSlide() { // - Функция для передвижения слайдов вперед
+				var left = isNaN(parseInt(ul.style.left)) ? 0 : parseInt(ul.style.left); // - Устанавливаем значение left, на которое слайдер будет сдвигаться при клике. isNaN() проверяем это цыфра или нет.
+
+				if( left == limit) { // - Условие если слайдер достиг края списка то останавливаем выполнение функции
+					return
+				} else {
+					ul.style.left = (left - liStyle) + "px"; // - Задаем значение сдвига вперед
+				};
+			};
+
+			function movePrevSlide() { // - Функция для передвижения слайдов назад
+				var right = isNaN(parseInt(ul.style.left)) ? 0 : parseInt(ul.style.left); // - Устанавливаем значение, на которое слайдер будет сдвигаться назад при клике
+
+				if(right == 0) { // - Если слайдер достиг края списка то останавливаем выполнение функции
+					return
+				} else {
+					ul.style.left = (right + liStyle) + "px"; // - Задаем значение сдвига назад
+				};
+			};
+
+			var next = document.getElementById('next'),
+				prev = document.getElementById('prev');
+
+			next.addEventListener('click', moveNextSlide); // - Вешаем обработчик событий на клик
+			prev.addEventListener('click', movePrevSlide); 
+			
+	</script>
+</body>
+</html>
