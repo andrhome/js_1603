@@ -11,21 +11,6 @@
         padding: 10px;
     }
     </style>
-    <script>
-        window.onload = function () {
-            var hideContainer = document.getElementById("container");
-            var removeEL = document.getElementById("remove");
-
-            hideContainer.addEventListener("click", hideContainerHolder);
-            function hideContainerHolder (e) {
-                var target = e && e.target || event.srcElement;
-                this.removeChild(target.parentNode);
-            };
-            removeEL.addEventListener("click", function () {
-                hideContainer.removeEventListener("click", hideContainerHolder);
-            });
-        };
-    </script>
 </head>
 <body>
     <div id="container">
@@ -46,5 +31,25 @@
         </div>
     </div>
     <button id="remove">removeEventListener</button>
+
+    <script>
+        var container = document.getElementById('container');
+
+        container.addEventListener('click', hideBlock);
+
+        function hideBlock(ev) {
+            var target = ev && ev.target || event.srcElement;
+            if(target.tagName != 'BUTTON') return;
+            target.parentNode.style.cssText = "display: none";
+        };
+
+        var remove = document.getElementById('remove');
+        
+        remove.addEventListener('click', removeHandler);
+
+        function removeHandler() {
+            container.removeEventListener('click', hideBlock);
+        };
+    </script>
 </body>
 </html>
