@@ -6,33 +6,13 @@
   <style>
     .tooltip-content {
       position: absolute;
+      top: 26px;
+      left: 8px;
+      height: 16px;
       border: 1px solid #ccc;
       padding: 3px;
     }
   </style>
-  <script>
-    window.onload = function () {
-      var mainDiv = document.getElementById("main-div");
-      mainDiv.onmouseover = function (e) {
-        var target = e && e.target || window.event.srcElement;
-        var dataToggleId = target.getAttribute('data-tooltip');
-        if (!dataToggleId) return;
-        var tooltip = document.createElement("div");
-        tooltip.innerHTML = dataToggleId;
-        tooltip.className = "tooltip-content";
-        target.appendChild(tooltip);
-        target.onmouseout = function () {
-          var mouseOutTooltip = null;
-          for (var i = 0; target.childNodes.length > i; i++) {
-            if (target.childNodes[i].className == "tooltip-content") {
-              mouseOutTooltip = target.childNodes[i];
-              mouseOutTooltip.parentNode.removeChild(mouseOutTooltip);
-            }
-          };
-        };
-      };
-    };
-  </script>
 </head>
 <body>
   <div id="main-div">
@@ -40,5 +20,32 @@
     <span data-tooltip="для">для</span> 
     <span data-tooltip="подсказки">подсказки</span>
   </div>
+
+  <script>
+      var mainDiv = document.getElementById('main-div'),
+          span = mainDiv.querySelectorAll('span');
+
+          mainDiv.addEventListener('mouseover', modalWindow);
+          mainDiv.addEventListener('mouseout', removeModalWindow);
+
+          function modalWindow(ev) {
+            var target = ev && ev.target || window.event.srcElement;
+            var data = target.getAttribute('data-tooltip');
+                console.log(data);
+                if(!data) return;
+
+            var div = document.createElement('div');
+                div.innerHTML = data;
+            target.appendChild(div);
+            div.className = 'tooltip-content';            
+          };
+
+          function removeModalWindow() {
+            var tooltipContent = mainDiv.querySelectorAll('.tooltip-content');
+            for(var i = 0; i < tooltipContent.length; i++) {
+              tooltipContent[i].remove(tooltipContent);
+            };
+          };
+  </script>
 </body>
 </html>
