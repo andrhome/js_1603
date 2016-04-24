@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{
+		margin: 0;
+	}
+	div{
+		width: 200px;
+		height: 200px;
+		overflow: hidden;
+	}
+	ul{
+		list-style: none;
+		padding: 0;
+		position: relative;
+	}
+	li {
+		width: 200px;
+		height: 200px;
+		float: left;
+	}
+	button{
+		display: inline-block;
+		color: black;
+	}
+</style>
+<body>
+	<div>
+		<ul id="ul">
+			<li style="background: #ff0000">1</li>
+			<li style="background: #00ff00">2</li>
+			<li style="background: #0000ff">3</li>
+			<li style="background: #ff6455">4</li>
+		</ul>
+	</div>
+	<div id="btn-holder">
+		<button type="button" data-direction="prev">prev</span>
+		<button type="button" data-direction="next">next</span>
+	</div>
+		
+	<script>
+		;(function() {
+
+			var ul = document.getElementById('ul'),
+				btnHolder = document.getElementById('btn-holder'),
+				li = ul.children,
+				count = ul.children.length,
+				width = parseInt(getComputedStyle(li[1]).width);
+
+				leftPosition();
+
+				btnHolder.addEventListener('click', clickHandler);
+
+				function leftPosition(left) {
+					var left = left ? left : 0;
+					ul.style.cssText = "width: " + width * (count + 1) + "px; left:" + (left) + "px"; 
+				};
+
+				function clickHandler() {
+					var target = event.target,
+                		attr = target.getAttribute("data-direction");
+
+						if(attr && attr == 'next') {
+							var cloningElem = ul.firstElementChild;
+								clonedElem = cloningElem.cloneNode(true);
+							leftPosition(width * -1);
+							ul.appendChild(clonedElem);
+						} else if(attr && attr == 'prev') {
+						var	cloningElem = ul.lastElementChild,
+							clonedElem = cloningElem.cloneNode(true);
+							leftPosition(width * -1);
+							ul.insertBefore(clonedElem, ul.firstElementChild);
+						} else {
+							return
+						};
+						leftPosition();
+						ul.removeChild(cloningElem);
+				};
+				
+		}());
+			
+	</script>
+</body>
+</html>

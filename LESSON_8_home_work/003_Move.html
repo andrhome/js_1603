@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+    <style>
+        #move-div {
+            height: 50px; 
+            width: 50px; 
+            background-color: red;
+            border-radius: 50px; 
+            position: relative;
+        }
+    </style>
+    <script type="text/javascript">
+        window.addEventListener('load', function() {
+            var moveDiv = document.getElementById('move-div'),
+                moveStart = null,
+                back = null,
+                leftPosition = 0;
+
+            moveDiv.addEventListener('click', moving);
+
+            function moving() {
+                moveStart = setInterval(function() {
+                    moveDiv.style.cssText = "left:" + leftPosition + "px";
+                    leftPosition += 1; 
+
+                var width = document.body.clientWidth - moveDiv.clientWidth;
+                    if(leftPosition == width) {
+                        clearInterval(moveStart);
+                        movingBack();
+                    };
+
+                }, 10);
+            }; 
+
+            function movingBack() {
+                back = setInterval(function() {
+                    moveDiv.style.cssText = "left:" + leftPosition + "px";
+                    leftPosition--;
+                    if(leftPosition == 0) {
+                        clearInterval(back);
+                        moving();
+                    };
+                }, 10);
+            };
+
+            var stopBtn = document.getElementById('stop-button');
+            stopBtn.addEventListener('click', stopMove);
+
+            function stopMove() {
+                clearInterval(moveStart);
+                clearInterval(back);
+            };
+        });
+    </script>
+</head>
+<body>
+    <div id="move-div">
+        
+    </div>
+    <button id="stop-button">stop</button>
+</body>
+</html>
