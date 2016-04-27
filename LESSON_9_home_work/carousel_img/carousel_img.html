@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<style>
+		.slide, .slider-list, .img-slide{
+			display: table;
+			margin: 0 auto;
+		}
+
+		.img-slide img{
+			width: 400px;
+		}
+
+		.slider-list img{
+			width:200px;
+			height: 200px;
+			margin: 5px;
+		}
+		.active{
+			opacity: .5
+		}
+	</style>
+
+	<div class="slide">
+		<div class="img-slide">
+			
+		</div>
+		<div class="slider-list">
+			<img src="images/img1.jpg">
+			<img src="images/img2.jpg">
+			<img src="images/img3.jpg">
+		</div>
+	</div>
+
+	<script>
+		;(function(slide){
+			if(!slide) return;
+
+			var emptyBlock = document.querySelector('img-slide'),
+				sliderList = slide.querySelector('.slider-list'),
+				count = sliderList.children.length,
+				width = parseInt(window.getComputedStyle(sliderList.firstElementChild).getPropertyValue('width')),
+				activeClass = 'active';
+
+			function cssGenerator(prop, value, elem) {
+				elem.style.cssText += prop + ':' + (value) + 'px';
+			};
+
+			function addListener() {
+				sliderList.addEventListener('click', handler);
+			};
+
+			// function firstElemActive() {
+			// 	var first = sliderList.firstElementChild,
+			// 		src = first.src ? first.src : '';
+			// 	emptyBlock.insertAdjacentHTML('afterBegin', '<img src=' + src + '/>');
+			// 	first.classList.add('active');
+			// };			
+
+			function handler(ev) {
+				var target = ev && event.target,
+					src = target.src ? target.src : '';
+
+					// removeClass();
+					emptyBlock.firstElementChild.src = src;
+					target.classList.add(activeClass);
+			};
+
+			// function removeClass() {
+			// 	var active = sliderList.querySelector('active');
+			// 	active.classList.remove('active');
+			// };
+
+			function init() {
+				// firstElemActive();
+				cssGenerator('width', (width + 10) * count, sliderList);
+				addListener();
+			};
+			init();
+			// console.log(width);
+		}(document.querySelector('.slide')));
+	</script>
+</body>
+</html>
