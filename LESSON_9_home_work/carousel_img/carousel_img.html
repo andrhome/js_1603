@@ -19,8 +19,9 @@
 			width:200px;
 			height: 200px;
 			margin: 5px;
+			cursor: pointer;
 		}
-		.active{
+		.-active{
 			opacity: .5
 		}
 	</style>
@@ -37,51 +38,53 @@
 	</div>
 
 	<script>
-		;(function(slide){
-			if(!slide) return;
+		(function(slider){
+			if(!slider) return;
 
-			var emptyBlock = document.querySelector('img-slide'),
-				sliderList = slide.querySelector('.slider-list'),
-				count = sliderList.children.length,
-				width = parseInt(window.getComputedStyle(sliderList.firstElementChild).getPropertyValue('width')),
-				activeClass = 'active';
+			
+				var emptyBlock = document.querySelector('.img-slide'),
+					sliderList = document.querySelector('.slider-list'),
+					count = sliderList.children.length,
+					width = parseInt(window.getComputedStyle(sliderList.firstElementChild).getPropertyValue('width')),
+					activeClass = '-active';
 
-			function cssGenerator(prop, value, elem) {
-				elem.style.cssText += prop + ':' + (value) + 'px';
-			};
+				function cssGenerator(props, val, el) {
+					el.style.cssText += props+':'+(val)+'px';
+				}
 
-			function addListener() {
-				sliderList.addEventListener('click', handler);
-			};
+				function addListener() {
+					sliderList.addEventListener('click', handler);
+				}
 
-			// function firstElemActive() {
-			// 	var first = sliderList.firstElementChild,
-			// 		src = first.src ? first.src : '';
-			// 	emptyBlock.insertAdjacentHTML('afterBegin', '<img src=' + src + '/>');
-			// 	first.classList.add('active');
-			// };			
+				function firstElementInit(){
+					var first = sliderList.firstElementChild,
+						src = first.src ? first.src : "";
+					emptyBlock.insertAdjacentHTML('afterBegin', '<img src="'+src+'" />');
+					first.classList.add(activeClass);
+				}
 
-			function handler(ev) {
-				var target = ev && event.target,
-					src = target.src ? target.src : '';
+				function handler() {
+					var target = event && event.target,
+						src = target.src ? target.src : "";
 
-					// removeClass();
+					removeClass();
 					emptyBlock.firstElementChild.src = src;
 					target.classList.add(activeClass);
-			};
 
-			// function removeClass() {
-			// 	var active = sliderList.querySelector('active');
-			// 	active.classList.remove('active');
-			// };
+				}
 
-			function init() {
-				// firstElemActive();
-				cssGenerator('width', (width + 10) * count, sliderList);
-				addListener();
-			};
+				function removeClass(){
+					var active = document.querySelector('.-active');
+					active.classList.remove('-active');
+				}
+
+				function init() {
+					firstElementInit();
+					cssGenerator('width', (width+10)*count, sliderList);
+					addListener();
+				}
+			
 			init();
-			// console.log(width);
 		}(document.querySelector('.slide')));
 	</script>
 </body>
