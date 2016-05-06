@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<style>
+		.slide, .slider-list, .img-slide{
+			display: table;
+			margin: 0 auto;
+		}
+
+		.img-slide img{
+			width: 400px;
+		}
+
+		.slider-list img{
+			width:200px;
+			height: 200px;
+			margin: 5px;
+			cursor: pointer;
+		}
+		.-active{
+			opacity: .5
+		}
+	</style>
+
+	<div class="slide">
+		<div class="img-slide">
+			
+		</div>
+		<div class="slider-list">
+			<img src="images/img1.jpg">
+			<img src="images/img2.jpg">
+			<img src="images/img3.jpg">
+		</div>
+	</div>
+
+	<script>
+		function Slider(el) {
+			this.elem = el;
+			this.containerImg = document.querySelector('.img-slide');
+			this.sliderList = document.querySelector('.slider-list');
+			this.count = this.sliderList.children.length;
+			this.width = parseInt(window.getComputedStyle(sliderList.firstElementChild).getPropertyValue('width'));
+			this.activeClass = '-active';
+		};
+
+		Slider.prototype.cssGenerator = function(props, val, el) {
+			el.style.cssText += props + ':' + (val) + 'px';
+		};
+
+		Slider.prototype.addListener = function() {
+			this.sliderList.addEventListener('click', handler);
+		};
+
+		Slider.prototype.firstElementInit = function(){
+			var first = sliderList.firstElementChild,
+				src = first.src ? first.src : "";
+			containerImg.insertAdjacentHTML('afterBegin', '<img src="'+src+'" />');
+			first.classList.add(activeClass);
+		}
+		
+		Slider.prototype.handler = function() {
+			var target = event && event.target,
+				src = target.src ? target.src : "";
+
+			removeClass();
+			containerImg.firstElementChild.src = src;
+			target.classList.add(activeClass);
+		};
+
+		Slider.prototype.removeClass = function() {
+			var active = document.querySelector('.-active');
+			active.classList.remove('-active');
+		};
+
+		Slider.prototype.init = function() {
+			firstElementInit();
+			cssGenerator('width', (width+10)*count, sliderList);
+			addListener();
+		};
+
+		new Slider(document.querySelector('.slide'));
+
+	</script>
+</body>
+</html>
