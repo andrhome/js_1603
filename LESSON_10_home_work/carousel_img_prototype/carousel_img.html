@@ -21,7 +21,7 @@
 			margin: 5px;
 			cursor: pointer;
 		}
-		.-active{
+		.active{
 			opacity: .5
 		}
 	</style>
@@ -38,52 +38,55 @@
 	</div>
 
 	<script>
-		function Slider(el) {
-			this.elem = el;
-			this.containerImg = document.querySelector('.img-slide');
-			this.sliderList = document.querySelector('.slider-list');
-			this.count = this.sliderList.children.length;
-			this.width = parseInt(window.getComputedStyle(sliderList.firstElementChild).getPropertyValue('width'));
-			this.activeClass = '-active';
-		};
-
-		Slider.prototype.cssGenerator = function(props, val, el) {
-			el.style.cssText += props + ':' + (val) + 'px';
-		};
-
-		Slider.prototype.addListener = function() {
-			this.sliderList.addEventListener('click', handler);
-		};
-
-		Slider.prototype.firstElementInit = function(){
-			var first = sliderList.firstElementChild,
-				src = first.src ? first.src : "";
-			containerImg.insertAdjacentHTML('afterBegin', '<img src="'+src+'" />');
-			first.classList.add(activeClass);
-		}
 		
-		Slider.prototype.handler = function() {
-			var target = event && event.target,
-				src = target.src ? target.src : "";
+			function Slider(el){
+				this.el = el;
+				this.emptyBlock = document.querySelector('.img-slide');
+				this.sliderList = document.querySelector('.slider-list');
+				this.count = this.sliderList.children.length;
+				this.width = parseInt(window.getComputedStyle(this.sliderList.firstElementChild).getPropertyValue('width'));
+				this.activeClass = 'active';
+				this.init();
+				this.cssGenerator();
+			};
 
-			removeClass();
-			containerImg.firstElementChild.src = src;
-			target.classList.add(activeClass);
-		};
+			Slider.prototype.cssGenerator = function(prop, val, elem) {
+				var elem = elem;
+				elem.style.cssText += this.prop+':'+(this.val)+'px';
+			};
 
-		Slider.prototype.removeClass = function() {
-			var active = document.querySelector('.-active');
-			active.classList.remove('-active');
-		};
+			Slider.prototype.addListener = function() {
+				var self = this;
+				self.sliderList.addEventListener('click', function(event) {
+					var target = event && event.target,
+					src = target.src ? target.src : "";
 
-		Slider.prototype.init = function() {
-			firstElementInit();
-			cssGenerator('width', (width+10)*count, sliderList);
-			addListener();
-		};
+					self.removeClass();
+					self.emptyBlock.firstElementChild.src = src;
+					target.classList.add(self.activeClass);
+				});
+			};
 
-		new Slider(document.querySelector('.slide'));
+			Slider.prototype.firstElementInit = function(){
+				var first = this.sliderList.firstElementChild,
+					src = first.src ? first.src : "";
+				this.emptyBlock.insertAdjacentHTML('afterBegin', '<img src="'+src+'" />');
+				first.classList.add(this.activeClass);
+			}
 
+			Slider.prototype.removeClass = function(){
+				var active = document.querySelector('.active');
+				active.classList.remove('active');
+			}
+
+			Slider.prototype.init = function() {
+				this.firstElementInit();
+				this.cssGenerator('width', (this.width+10)*this.count, this.sliderList);
+				this.addListener();
+			};
+
+			new Slider(document.querySelector('.slide'));
+		
 	</script>
 </body>
 </html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<script>
+		window.onload = function() {
+
+			function Machine() {
+				var enabled = false;
+
+				this.enable = function() {
+					enabled = true;
+					alert('Аппарат включен!');
+				};
+
+				this.disable = function() {
+					enabled = false;
+					alert('Аппарат выключен!');
+				};
+			};
+
+			function CoffeeMachine(power) {
+				Machine.call(this);
+
+				var waterAmount = 0;
+
+				this.setWaterAmount = function(amount) {
+					waterAmount = amount;
+					alert('Налили ' + amount + ' мл воды.');
+				};
+			};
+
+			// var coffeeMachine = new CoffeeMachine(10000);
+			// coffeeMachine.enable();
+			// coffeeMachine.setWaterAmount(1000);
+			// coffeeMachine.disable();
+
+
+			//Защищенное свойство this._свойство - Подчёркивание в начале свойства – общепринятый знак, что свойство является внутренним, предназначенным лишь для доступа из самого объекта и его наследников. Такие свойства называют защищёнными.
+			function Machine() {
+				this._enabled = false;
+
+				this.enable = function() {
+					this._enabled = true;
+					alert('Аппарат включен!');
+				};
+
+				this.disable = function() {
+					this._enabled = false;
+					alert('Аппарат выключен!');
+				};
+			};
+
+			function CoffeeMachine(power) {
+				Machine.call(this);
+
+				this.enable();
+
+				alert(this._enabled);
+			};
+
+ 			// var coffeeMachine = new CoffeeMachine(10000);
+
+ 			//У CoffeeMachine есть приватное свойство power. Сейчас мы его тоже сделаем защищённым и перенесём в Machine
+ 			function Machine(power) {
+				this._power = power;
+				this._enabled = false;
+
+				this.enable = function() {
+					this._enabled = true;
+					alert('Аппарат включен!');
+				};
+
+				this.disable = function() {
+					this._enabled = false;
+					alert('Аппарат выключен!');
+				};
+			};
+
+			function CoffeeMachine(power) {
+				Machine.apply(this, arguments); // вызывает Machine в текущем контексте вместе с передачей текущих аргументов. Можно было бы использовать и более простой вызов Machine.call(this, power), но использование apply гарантирует передачу всех аргументов, вдруг их количество увеличится – не надо будет переписывать.
+
+				alert(this._power);
+			};
+
+			// var coffeeMachine = new CoffeeMachine(10000);
+
+
+			// Переопределение методов
+			function CoffeeMachine() {
+				Machine.apply(this, arguments);
+
+				var parentEneble = this.enable; // Копируем доставшийся от родителя метод this.enable в переменную, например parentEnable.
+				this.enable = function() { // Заменяем this.enable на свою функцию
+					parentEneble.call(this); // …Которая по-прежнему реализует старый функционал через вызов parentEnable.
+					this.run(); // …И в дополнение к нему делает что-то своё, например запускает приготовление кофе.
+				};
+			};
+
+
+			// не использовать this, а получать контекст через замыкание
+			function Machine2(power) {
+				
+				this._enable = false;
+
+				var self = this;
+
+				this.enable = function() {
+					self_enable = true; // используем внешнюю переменную вместо this
+				};
+
+				this.disable = function() {
+					self_enable = false;
+				};
+			};
+
+			function CoffeeMachine2() {
+				Machine2.apply(this, arguments);
+
+				var waterAmount = 0;
+
+				this.setWaterAmount = function(amount) {
+					waterAmount = amount;
+					alert('Налили ' + amount + ' мл воды.');
+				};
+
+				var parentEnable = this.enable;
+				this.enable = function() {
+					parentEnable(); // теперь можно вызывать как угодно, this не важен
+					this.run();
+				}; 
+
+				function onReady() {
+				    alert( 'Кофе готово!' );
+				}
+
+				this.run = function() {
+				    setTimeout(onReady, 1000);
+				};
+			};
+
+			var coffeeMachine2 = new CoffeeMachine2(10000);
+			coffeeMachine2.setWaterAmount(50);
+			coffeeMachine2.enable();
+		};
+	</script>
+</body>
+</html>
