@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Lesson_12_repeat</title>
+</head>
+<body>
+	<div id="myDiv">
+        <h2>AJAX в действии</h2>
+    </div>
+    <button type="button" onclick="loadXMLDoc()">Изменить контент</button>
+
+	<script>
+		function crosBrowserXHR() {
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				return new XMLHttpRequest();
+			} else{
+				return new ActiveXObject('Microsoft.XMLHTTP');
+			};
+		};
+
+		function loadXMLDoc() {
+			var xmlhttp = crosBrowserXHR();
+			xmlhttp.onreadystatechange = function() {
+				if(xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+					document.getElementById('myDiv').innerHTML = xmlhttp.responseText;
+				}
+			};
+			xmlhttp.open("GET", "ajax.html", true);
+			xmlhttp.send();
+		};
+
+
+		//////////////////////////////////
+
+		var xhr = new XMLHttpRequest();
+
+		xhr.open('POST', 'ajax.php', true);
+		xhr.send();
+
+		xhr.onreadystatechange = function() {
+			if(this.readyState != 4) return;
+
+			if(this.status != 200) {
+				alert( 'ошибка: ' + (this.status ? this.statusText : 'запрос не удался') );
+				return;
+			}
+
+			var ready = document.getElementById('id');
+			ready.innerHTML = xhr.responseText;
+		};
+
+		////////////////////////////////////////
+
+		var obj = {
+			language: "JavaScript",
+			version: "ECMA 5" 
+		};
+
+		window.localStorage.setItem('app', JSON.stringify(obj));
+
+		var workingString = window.localStorage.getItem('app'); // Переводим объект app из localStorage в строку
+		var workingObject = JSON.parse(workingString); // Парсим строку app и переводим в обычный (удобный для использования) объект
+
+	</script>
+</body>
+</html>
