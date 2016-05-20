@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Date</title>
+</head>
+<body>
+	<script>
+
+		function Helper() {};
+
+		Helper.prototype.dateNow = function() {
+			var today = new Date(),
+			todayPars = new Date(today.getFullYear(), today.getMonth(), today.getDate()).valueOf();
+			return todayPars;
+		};
+
+		// Helper.prototype.dateCreate = function(strDate) {
+		// 	var date = new Date(strDate);
+		// 	var oldDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).valueOf();
+		// 	return oldDate;
+		// };
+
+		Helper.prototype.getMounth = function (month, lang) {
+			var mounthObject = {
+				ru: {
+					1: 'Января',
+					2: 'Февраля',
+					3: 'Марта',
+					4: 'Апреля',
+					5: 'Мая',
+					6: 'Июня',
+					7: 'Июля',
+					8: 'Августа',
+					9: 'Сентября',
+					10: 'Октября',
+					11: 'Ноября',
+					12: 'Декабря'
+				},
+				uk: {
+					1: "Січня",
+					2: "Лютого",
+					3: "Березня",
+					4: "Квітня",
+					5: "Травня",
+					6: "Червня",
+					7: "Липня",
+					8: "Серпня",
+					9: "Вересня",
+					10: "Жовтня",
+					11: "Листопада",
+					12: "Грудня"
+				}
+			};
+			return mounthObject[lang][month];
+		};
+
+		Helper.prototype.compareDates = function(datestring) {
+			var	parseDateStr = datestring.split(' ')[0],
+				parseTimeStr = datestring.split(' ')[1],
+				dateString = new Date(parseDateStr),
+				onlyDay = new Date(dateString.getFullYear(), dateString.getMonth(), dateString.getDate()).valueOf(),
+				currentDate = this.dateNow();
+			
+			if(currentDate > onlyDay) {
+				console.log(currentDate);
+			} else {
+				console.log(parseTimeStr);
+			};
+		};
+
+		var helper = new Helper();
+		helper.compareDates('2016-05-10 11:50:50');
+
+	</script>
+</body>
+</html>
