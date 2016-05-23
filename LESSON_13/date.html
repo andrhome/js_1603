@@ -9,66 +9,70 @@
 
 		function Helper() {};
 
+		// Метод для получения текущей даты в секундах для дальнейшего сравнения дат
 		Helper.prototype.dateNow = function() {
 			var today = new Date(),
-			todayPars = new Date(today.getFullYear(), today.getMonth(), today.getDate()).valueOf();
+			todayPars = new Date(today.getFullYear(), today.getMonth(), today.getDate()).valueOf(); // С помощью .valueOf() сегодняшнюю дату переводим в секунды 
 			return todayPars;
 		};
-
-		// Helper.prototype.dateCreate = function(strDate) {
-		// 	var date = new Date(strDate);
-		// 	var oldDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).valueOf();
-		// 	return oldDate;
-		// };
 
 		Helper.prototype.getMounth = function (month, lang) {
 			var mounthObject = {
 				ru: {
-					1: 'Января',
-					2: 'Февраля',
-					3: 'Марта',
-					4: 'Апреля',
-					5: 'Мая',
-					6: 'Июня',
-					7: 'Июля',
-					8: 'Августа',
-					9: 'Сентября',
-					10: 'Октября',
-					11: 'Ноября',
-					12: 'Декабря'
+					0: 'Января',
+					1: 'Февраля',
+					2: 'Марта',
+					3: 'Апреля',
+					4: 'Мая',
+					5: 'Июня',
+					6: 'Июля',
+					7: 'Августа',
+					8: 'Сентября',
+					9: 'Октября',
+					10: 'Ноября',
+					11: 'Декабря'
 				},
 				uk: {
-					1: "Січня",
-					2: "Лютого",
-					3: "Березня",
-					4: "Квітня",
-					5: "Травня",
-					6: "Червня",
-					7: "Липня",
-					8: "Серпня",
-					9: "Вересня",
-					10: "Жовтня",
-					11: "Листопада",
-					12: "Грудня"
+					0: "Січня",
+					1: "Лютого",
+					2: "Березня",
+					3: "Квітня",
+					4: "Травня",
+					5: "Червня",
+					6: "Липня",
+					7: "Серпня",
+					8: "Вересня",
+					9: "Жовтня",
+					10: "Листопада",
+					11: "Грудня"
 				}
 			};
 			return mounthObject[lang][month];
 		};
 
+		// Метод сравнения дат и вывод результата
 		Helper.prototype.compareDates = function(datestring) {
-			var	parseDateStr = datestring.split(' ')[0],
-				parseTimeStr = datestring.split(' ')[1],
-				dateString = new Date(parseDateStr),
-				onlyDay = new Date(dateString.getFullYear(), dateString.getMonth(), dateString.getDate()).valueOf(),
-				currentDate = this.dateNow();
+			var	parsedDateStr = datestring.split(' ')[0], // Разделяем полученую из вне строку ('2016-05-10 11:50:50') по пробелу и берем только первое значение '2016-05-10';
+				parsedTimeStr = datestring.split(' ')[1], // Здесь тоже самое только берем второе значение '11:50:50';
+				
+				outsideDate = new Date(parsedDateStr), // Переводим полученную строку '2016-05-10' в формат времени
+				outsideDateSeconds = new Date(outsideDate.getFullYear(), outsideDate.getMonth(), outsideDate.getDate()).valueOf(), // Получаем дату в секундах для дальнейшего сравнения;
+				currentDateSeconds = this.dateNow(); // Заносим в переменную значение сегодняшней даты в секундах, полученой методом .dateNow();
+
+				// Дальше мы берем текущую дату чтобы из нее взять день и год и вставить в вывод результата;
+				var curentDate = new Date(); 
+					curentDay = curentDate.getDate(), // Берем день;
+					curentYear = curentDate.getFullYear(); // Берем год;
+
 			
-			if(currentDate > onlyDay) {
-				console.log(this.getMounth(dateString.getMonth(), 'uk'));
+			if(currentDateSeconds > outsideDateSeconds) { // Сравнение результатов дат полученных в секундах
+				alert(curentDay + ' ' + this.getMounth(outsideDate.getMonth(), 'uk') + ' ' + curentYear); // Этот рузультат выводим если значение полученной извне даты меньше чем сегодняшняя дата;
 			} else {
-				console.log(parseTimeStr);
+				alert(parsedTimeStr); // Этот рузультат выводим если значение полученной извне даты больше чем сегодняшняя дата;
 			};
 		};
 
+		// Создаем новый объект helper и вызываем его с полученной извне датой '2016-05-10 11:50:50' в качестве аргумента
 		var helper = new Helper();
 		helper.compareDates('2016-05-10 11:50:50');
 
