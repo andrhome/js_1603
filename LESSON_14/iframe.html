@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Iframe</title>
+</head>
+<body>
+	<div class="source" data-frame="http://4side.in.ua/,http://4side.in.ua/portfolio/56eef402b253494b0d0e6201"></div>
+	<script>
+		function CreateIframe(elem) {
+
+			if(!elem) return;
+
+			var dataFrame = elem.getAttribute('data-frame'),
+				arr = dataFrame.split(','),
+				readyIframe = '';
+
+			// Цыклом заполняем src у iframe и записываем готовые iframes в виде строки в readyIframe
+			for(var i = 0; i < arr.length; i++) {
+				readyIframe += this.template(arr[i]);
+			}
+
+			elem.insertAdjacentHTML('afterBegin', readyIframe); // Вставляем готовые iframes в блок див source
+		};
+
+		// Метод для создания iframes
+		CreateIframe.prototype.template = function(src) {
+			var block = '<div class="val-iframe-streams">' +
+							'<span class="val-ico-online">' +
+								'<i></i>' +
+							'</span>' + 
+							'<iframe src="'+ src + '"></iframe>' +
+						'</div>';
+			return block;
+		};
+
+		window.addEventListener('DOMContentLoaded', function() {
+			var newFrame = new CreateIframe(document.querySelector('.source'));
+		});
+	</script>
+</body>
+</html>
