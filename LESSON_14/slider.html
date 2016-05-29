@@ -32,12 +32,16 @@
 		text-align: center;
 	}
 	#pagination span{
-		width: 10px;
-		height: 10px;
+		width: 13px;
+		height: 13px;
+		border: 3px solid #071482;
 		display: inline-block;
-		background: #656565;
 		border-radius: 50%;
 		margin: 15px 5px;
+		cursor: pointer;
+	}
+	#pagination span:hover{
+		background: #071482;
 	}
 </style>
 <body>
@@ -58,25 +62,41 @@
 			this.sliderHolder = document.getElementById('slider-holder');
 			this.slider = document.getElementById('slider');
 			this.liSlides = this.slider.querySelectorAll('li');
-			var pagination = document.getElementById('pagination'),
-				paginationsStr = '';
+			this.pagination = document.getElementById('pagination');
+			var paginationsStr = '';
 
 			for (var i = 0; i < this.liSlides.length; i++) {
 				paginationsStr += '<span></span>'
 			};
 
 			pagination.insertAdjacentHTML('afterBegin', paginationsStr);
+
+			this.setAttributes();
+			
+
+			this.pagination.addEventListener('click', this.moveSlide);
 		}
 
 		Slider.prototype.setAttributes = function() {
+			var spans = this.pagination.querySelectorAll('span');
 			for (var i = 0; i < this.liSlides.length; i++) {
 				this.liSlides[i].setAttribute('data-slide', i);
+				spans[i].setAttribute('data-controls', i);
 			};
+		};
+
+		Slider.prototype.moveSlide = function(ev) {
+			var target = ev && event.target,
+				dataControls = target.getAttribute('data-controls'),
+				li = this.slider.querySelector('li'),
+				dataSlide = li.getAttribute('data-slide');
+				
+				console.log(dataSlide);
+				console.log(1);
 		};
 
 		window.addEventListener('DOMContentLoaded', function()  {
 			var newSlider = new Slider();
-			
 		});
 	</script>
 </body>
