@@ -19,6 +19,8 @@
 		padding: 0;
 		overflow: hidden;
 		position: relative;
+		-webkit-transition: all .25s ease-in-out;
+		transition: all .25s ease-in-out;
 	}
 	li {
 		width: 200px;
@@ -43,7 +45,8 @@
 		margin: 15px 5px;
 		cursor: pointer;
 	}
-	#pagination span:hover{
+	#pagination span:hover,
+	#pagination span.active{
 		background: #071482;
 	}
 </style>
@@ -62,21 +65,46 @@
 		function Slider(slider) {
 			if(!slider) return;
 
-			this.sliderHolder = document.getElementById('slider-holder');
-			this.slider = document.getElementById('slider');
-			this.liSlides = this.slider.querySelectorAll('li');
-			this.pagination = document.getElementById('pagination');
-			this.count = this.liSlides.length;
-			this.liWidth = parseInt(window.getComputedStyle(this.slider.firstElementChild).getPropertyValue('width'));
+			var self = this;
+
+			self.slider = document.getElementById('slider');
+			self.liSlides = self.slider.querySelectorAll('li');
+			self.pagination = document.getElementById('pagination');
+			self.count = self.liSlides.length;
+			self.liWidth = parseInt(window.getComputedStyle(self.slider.firstElementChild).getPropertyValue('width'));
 			var paginationsStr = '';
 
-			for (var i = 0; i < this.liSlides.length; i++) {
+			for (var i = 0; i < self.liSlides.length; i++) {
 				paginationsStr += '<span></span>'
 			};
 
-			pagination.insertAdjacentHTML('afterBegin', paginationsStr);			
+			this.cssGenerator('width', self.count * self.liWidth, self.slider);
+			self.pagination.insertAdjacentHTML('afterBegin', paginationsStr);	
+			this.setAttributes();
+			self.pagin = self.pagination.children;
+			self.pagin[0].classList.add('active');	
+			self.paginActive = self.pagination.querySelector('.active');
+			self.paginActiveAttr = self.paginActive.getAttribute('data-controls');
+			self.moveSlide = function() {
+				var target = event.target,
+					dataControls = target.getAttribute('data-controls');
+				self.paginActive.classList.remove('active');
+				target.classList.add('active');
+				self.paginActive = self.pagination.querySelector('.active');
 
-			this.init();	
+				var propX = 0;
+
+				if(dataControls > self.paginActiveAttr){
+					propX = -self.liWidth * dataControls;
+				} 
+				else if (dataControls < self.paginActiveAttr) {
+					propX = self.liWidth * dataControls;
+				}		
+				self.slider.style.transform = 'translateX(' + propX + 'px)';
+				console.log(self.slider.style.transform);			
+			};
+
+			self.pagination.addEventListener('click', self.moveSlide);
 		}
 
 		Slider.prototype.cssGenerator = function(prop, val, el) {
@@ -84,35 +112,10 @@
 		};
 
 		Slider.prototype.setAttributes = function() {
-			var spans = this.pagination.querySelectorAll('span');
-			for (var i = 0; i < this.liSlides.length; i++) {
-				this.liSlides[i].setAttribute('data-slide', i);
+			var spans = self.pagination.querySelectorAll('span');
+			for (var i = 0; i < spans.length; i++) {
 				spans[i].setAttribute('data-controls', i);
 			};
-		};
-
-		Slider.prototype.moveSlide = function() {
-			var target = event.target,
-				dataControls = target.getAttribute('data-controls'),
-				liSlides = document.querySelectorAll('#slider li');
-				// slider = document.getElementById('slider');
-			// this.cssGenerator('left', this.liWidth, this.slider);
-
-			// for(var i = 0; i < liSlides.length; i++) {
-			// 	var dataSlide = liSlides[i].getAttribute('data-slide');
-			// 	if(dataControls && dataControls == dataSlide) {
-
-			// 		console.log(dataControls);
-			// 		console.log(dataSlide);
-			// 	}
-			// }
-			
-		};
-
-		Slider.prototype.init = function() {
-			this.cssGenerator('width', this.count * this.liWidth, this.slider);
-			this.setAttributes();
-			this.pagination.addEventListener('click', this.moveSlide);
 		};
 
 		window.addEventListener('DOMContentLoaded', function()  {
