@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Weather</title>
+</head>
+<body>
+	<script>
+		window.addEventListener('DOMContentLoaded', function() {
+
+			function Weather() {
+				var xhr = new XMLHttpRequest();
+
+				xhr.open('GET', 'https://query.yahooapis.com/v1/public/yql?q=select%20item%20from%20weather.forecast%20where%20woeid%3D918233%20and%20u%3D%22c%22&format=json&l=ru', true);
+
+				xhr.onreadystatechange = function() {
+
+					if(xhr.status == 200 && xhr.readyState == 4) {
+						console.log(xhr.responseText);
+					}
+				};
+
+				xhr.send();
+			};
+
+			var weather = new Weather();
+		});
+	</script>
+</body>
+</html>
