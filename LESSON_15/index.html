@@ -31,6 +31,10 @@
 				self.forecast_3_HighTemp;
 				self.forecast_3_LowTemp;
 				self.forecast_3_Date;
+				self.forecast_4_code;
+				self.forecast_4_HighTemp;
+				self.forecast_4_LowTemp;
+				self.forecast_4_Date;
 				// self.forecast_1_Descr;
 
 				xhr.open('GET', 'https://query.yahooapis.com/v1/public/yql?q=select%20item%20from%20weather.forecast%20where%20woeid%3D918233%20and%20u%3D%22c%22&format=json&l=ru', true);
@@ -138,6 +142,27 @@
 			                        	// 	self.forecast_3_Descr = obj[key][3][prop];
 			                        	// };
 			                    	}
+			                    	for(var prop in obj[key][4]) {
+			                    		if(prop == 'code') {
+			                        		self.forecast_4_code = obj[key][4][prop];
+			                        	};
+
+			                        	if(prop == 'high') {
+			                        		self.forecast_4_HighTemp = obj[key][4][prop];
+			                        	};
+
+			                        	if(prop == 'low') {
+			                        		self.forecast_4_LowTemp = obj[key][4][prop];
+			                        	};
+
+			                        	if(prop == 'date') {
+			                        		self.forecast_4_Date = obj[key][4][prop];
+			                        	};
+
+			                        	// if(prop == 'text') {
+			                        	// 	self.forecast_4_Descr = obj[key][4][prop];
+			                        	// };
+			                    	}
 			                    };
 
 			                    if(typeof obj[key] == 'object') {
@@ -200,6 +225,12 @@
 								                '<span class="day">' + this.forecast_3_Date + ' ' + '</span>' +
 								                '<span class="temperature-days high-temperature">' + this.forecast_3_HighTemp + ' С° </span>' +
 								                '<span class="temperature-days low-temperature">' + this.forecast_3_LowTemp + ' С° </span>' +
+								            '</li>' +
+								            '<li class="item-time-temperature">' +
+								                '<span class="icons-for-c icon-weather-' + this.forecast_4_code + '"></span>' +
+								                '<span class="day">' + this.forecast_4_Date + ' ' + '</span>' +
+								                '<span class="temperature-days high-temperature">' + this.forecast_4_HighTemp + ' С° </span>' +
+								                '<span class="temperature-days low-temperature">' + this.forecast_4_LowTemp + ' С° </span>' +
 								            '</li>' +
 				                      '</ul>' +
 				                  '</div>' +
