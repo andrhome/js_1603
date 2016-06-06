@@ -1,0 +1,145 @@
+@import '001func.styl'
+
+.val-modal-login-reg-outer
+	width 100%
+	height 100%
+	position fixed 
+	z-index 99999
+	display none
+	background rgba(255, 255, 255, 0.7)
+	opacity 0
+	transition .5s
+
+.-active-outer
+	display table
+	animation-name opacitys
+	animation-delay .1s
+	animation-duration .6s
+	transition .2s
+	animation-fill-mode both
+	
+.-active-outer-out
+	animation-name hidens
+	animation-delay 0s
+	animation-duration .6s
+	transition .2s
+	animation-fill-mode both
+
+.val-cell-modal-outer
+	display table-cell
+	vertical-align middle
+
+.val-content-for-login
+	width 300px
+	position relative
+	margin 0 auto
+	background #fff
+	opacity 0
+	display none
+	padding 20px
+	box-shadow 1px 1px 10px 3px rgba(0,0,0, 0.3)
+	&:before
+		width 250px
+		background generalGreenColor
+		height 2px
+		position absolute
+		top 0
+		left 0
+		content ""
+	
+.-animate-content-window
+	animation-name opacitys
+	animation-delay .1s
+	animation-duration .6s
+	transition .2s
+	animation-fill-mode both
+
+.-animate-content-window-close
+	animation-name hidens
+	animation-delay 0s
+	animation-duration .6s
+	transition .2s
+	animation-fill-mode both
+
+@keyframes opacitys
+	from
+		opacity 0
+	to
+		opacity 1
+
+@keyframes hidens
+	from
+		opacity 1
+	to
+		opacity 0
+
+.val-html-modal-form .val-title-uppercase-small
+	margin-bottom 20px
+
+.val-html-modal-form input
+	width 100%
+	height 32px
+	border none
+	background backGrey
+	margin 0px 0 20px
+	padding 0 10px
+	border 1px solid rgba(21, 148, 139, 0.1)
+
+
+.-about-modal
+	width 760px
+
+.val-about-modal-content
+	font-size 14px
+	
+.val-about-modal-content p 
+	margin-bottom 15px
+	line-height 16px
+
+.val-about-modal-content p span
+	color #60AFB8
+	
+.val-about-modal-content a 
+	display inline-block
+	text-transform none
+	color #15948b
+	padding 0 0 3px
+	border-bottom 1px solid rgba(21,148,139,.33)
+	&:hover 
+		border-bottom 1px solid transparent
+
+.val-about-contacts
+	padding-left 20px 
+	margin-top -10px
+	
+.val-about-contacts li 
+	padding 3px 0
+
+.-no-margin-left-only-right
+	margin 0 10px 0 0
+
+.-val-remember-pass
+	color generalGreenColor
+	padding 2px 0
+	border-bottom 1px solid rgba(21,148,139,.33)
+	&:hover
+		border-bottom 1px solid transparent
+
+.remember
+	display none
+
+.val-notice
+	padding 20px 0 0
+	font-size 13px
+	color generalBlueColor
+	line-height 16px
+
+.val-close-modals
+	width 16px
+	height 16px
+	display inline-block
+	position absolute
+	right 20px
+	top 16px
+	cursor pointer
+	background url(../images/sprite.png) -218px 22px

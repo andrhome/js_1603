@@ -13,225 +13,58 @@
 
 				var self = this;
 
-				self.todayTemperature;
-				self.conditionCode;
-				self.forecast_today_code;
-				self.forecast_today_HighTemp;
-				self.forecast_today_LowTemp;
-				self.forecast_today_Descr;
-				self.forecast_1_code;
-				self.forecast_1_HighTemp;
-				self.forecast_1_LowTemp;
-				self.forecast_1_Date;
-				self.forecast_2_code;
-				self.forecast_2_HighTemp;
-				self.forecast_2_LowTemp;
-				self.forecast_2_Date;
-				self.forecast_3_code;
-				self.forecast_3_HighTemp;
-				self.forecast_3_LowTemp;
-				self.forecast_3_Date;
-				self.forecast_4_code;
-				self.forecast_4_HighTemp;
-				self.forecast_4_LowTemp;
-				self.forecast_4_Date;
-				// self.forecast_1_Descr;
-
 				xhr.open('GET', 'https://query.yahooapis.com/v1/public/yql?q=select%20item%20from%20weather.forecast%20where%20woeid%3D918233%20and%20u%3D%22c%22&format=json&l=ru', true);
 
 				xhr.onreadystatechange = function() {
 					if(xhr.status == 200 && xhr.readyState == 4) {
 
 						var xhrObj = JSON.parse(xhr.responseText);
-						this.getProp = function(obj, callback) {
-			                for(var key in obj) {
 
-			                    if(key == 'condition') {
-			                        for(var prop in obj[key]) {
-			                        	if(prop == 'code') {
-			                        		self.conditionCode = obj[key][prop];
-			                        		callback(prop, self.conditionCode);
-			                        	};
+						self.getProp(xhrObj, 'item', self.constructorNodes, self);
 
-			                        	if(prop == 'temp') {
-			                        		self.todayTemperature = obj[key][prop];
-			                        		callback(prop, self.todayTemperature);
-			                        	};
-			                        };
-			                    };
-
-			                    if(key == 'forecast') {
-			                    	for(var prop in obj[key][0]) {
-			                    		if(prop == 'code') {
-			                        		self.forecast_today_code = obj[key][0][prop];
-			                        		callback(prop, self.forecast_today_code);
-			                        	};
-
-			                        	if(prop == 'high') {
-			                        		self.forecast_today_HighTemp = obj[key][0][prop];
-			                        	};
-
-			                        	if(prop == 'low') {
-			                        		self.forecast_today_LowTemp = obj[key][0][prop];
-			                        	};
-
-			                        	if(prop == 'text') {
-			                        		self.forecast_today_Descr = obj[key][0][prop];
-			                        	};
-			                    	}
-			                    	for(var prop in obj[key][1]) {
-			                    		if(prop == 'code') {
-			                        		self.forecast_1_code = obj[key][1][prop];
-			                        	};
-
-			                        	if(prop == 'high') {
-			                        		self.forecast_1_HighTemp = obj[key][1][prop];
-			                        	};
-
-			                        	if(prop == 'low') {
-			                        		self.forecast_1_LowTemp = obj[key][1][prop];
-			                        	};
-
-			                        	if(prop == 'date') {
-			                        		self.forecast_1_Date = obj[key][1][prop];
-			                        	};
-
-			                        	// if(prop == 'text') {
-			                        	// 	self.forecast_1_Descr = obj[key][1][prop];
-			                        	// };
-			                    	}
-			                    	for(var prop in obj[key][2]) {
-			                    		if(prop == 'code') {
-			                        		self.forecast_2_code = obj[key][2][prop];
-			                        	};
-
-			                        	if(prop == 'high') {
-			                        		self.forecast_2_HighTemp = obj[key][2][prop];
-			                        	};
-
-			                        	if(prop == 'low') {
-			                        		self.forecast_2_LowTemp = obj[key][2][prop];
-			                        	};
-
-			                        	if(prop == 'date') {
-			                        		self.forecast_2_Date = obj[key][2][prop];
-			                        	};
-
-			                        	// if(prop == 'text') {
-			                        	// 	self.forecast_2_Descr = obj[key][2][prop];
-			                        	// };
-			                    	}
-			                    	for(var prop in obj[key][3]) {
-			                    		if(prop == 'code') {
-			                        		self.forecast_3_code = obj[key][3][prop];
-			                        	};
-
-			                        	if(prop == 'high') {
-			                        		self.forecast_3_HighTemp = obj[key][3][prop];
-			                        	};
-
-			                        	if(prop == 'low') {
-			                        		self.forecast_3_LowTemp = obj[key][3][prop];
-			                        	};
-
-			                        	if(prop == 'date') {
-			                        		self.forecast_3_Date = obj[key][3][prop];
-			                        	};
-
-			                        	// if(prop == 'text') {
-			                        	// 	self.forecast_3_Descr = obj[key][3][prop];
-			                        	// };
-			                    	}
-			                    	for(var prop in obj[key][4]) {
-			                    		if(prop == 'code') {
-			                        		self.forecast_4_code = obj[key][4][prop];
-			                        	};
-
-			                        	if(prop == 'high') {
-			                        		self.forecast_4_HighTemp = obj[key][4][prop];
-			                        	};
-
-			                        	if(prop == 'low') {
-			                        		self.forecast_4_LowTemp = obj[key][4][prop];
-			                        	};
-
-			                        	if(prop == 'date') {
-			                        		self.forecast_4_Date = obj[key][4][prop];
-			                        	};
-
-			                        	// if(prop == 'text') {
-			                        	// 	self.forecast_4_Descr = obj[key][4][prop];
-			                        	// };
-			                    	}
-			                    };
-
-			                    if(typeof obj[key] == 'object') {
-			                        this.getProp(obj[key], callback);
-			                    };
-			                };
-			            };
-						this.getProp(xhrObj, function(property, val) {
-							console.log(property + ': ' + val);
-			                return val;
-			            });
-
-			            self.constructorNodes();
 					};
 				};
 
 				xhr.send();
+
+				this.getProp = function(obj, propObj, callback, self) {
+					for(var key in obj) {
+	                    if(key == propObj) {
+	                        callback(obj[key], self);
+	                    } else if( typeof obj[key] == 'object') {
+	                        self.getProp(obj[key], propObj, callback, self);
+	                    };
+	                };
+				}
 			};
 
-			Weather.prototype.constructorNodes = function() {
+			Weather.prototype.constructorNodes = function(val, self) {
 				var html = '<div class="drop-weather-button">' +
 				              '<div class="outer-today-ico">' +
-				                  '<span class="icons-for-c-min icon-weather-min-' + this.conditionCode + '"></span>' +
-				                  '<i class="today-weather">' + this.todayTemperature + ' С°</i>' +
+				                  '<span class="icons-for-c-min icon-weather-min-' + val.condition.code + '"></span>' +
+				                  '<i class="today-weather">' + val.condition.temp + ' С°</i>' +
 				              '</div>' +
 				              '<div class="drop-wether">' +
 				                  '<p class="for-genwether"><span class="title-weather">Погода</span><span class="city-weather">Украина,  Чернигов</span></p>' +
 				                  '<div class="section-today">' +
 				                '<div class="for-weather-icon">' +
 				                  '<h5 class="section-heading">Сьогодні</h5>' +
-				                  '<span class="icons-for-c icon-weather-' + this.forecast_today_code + '"></span>' +
+				                  '<span class="icons-for-c icon-weather-' + val.condition.code + '"></span>' +
 				                '</div>' +
 				              '<div class="weather-detail">' +
 				                  '<h4 class="weather-heading">' +
-				                      '<span class="temp-now">' + this.todayTemperature + ' С° </span>' +
+				                      '<span class="temp-now">' + val.condition.temp + ' С° </span>' +
 				                      '<span class="phrase">Температура зараз</span>' +
 				                  '</h4>' +
-				                  '<span class="temperature high-temperature">' + this.forecast_today_HighTemp + ' С° - </span>' +
-				                  '<span class="temperature low-temperature">' + this.forecast_today_LowTemp + ' С°</span>' +
-				                  '<p class="summary">' + this.forecast_today_Descr + '</p>' +
+				                  // '<span class="temperature high-temperature">' + this.forecast_today_HighTemp + ' С° - </span>' +
+				                  // '<span class="temperature low-temperature">' + this.forecast_today_LowTemp + ' С°</span>' +
+				                  '<p class="summary">' + val.condition.text + '</p>' +
 				              '</div>' +
 				                  '</div>' +
 				                  '<div class="section-this-week">' +
 				                      '<h5 class="section-heading">Тиждень</h5>' +
 				                      '<ul class="item-list-temperature">' +
-				                          	'<li class="item-time-temperature">' +
-								                '<span class="icons-for-c icon-weather-' + this.forecast_1_code + '"></span>' +
-								                '<span class="day">' + this.forecast_1_Date + ' ' + '</span>' +
-								                '<span class="temperature-days high-temperature">' + this.forecast_1_HighTemp + ' С° </span>' +
-								                '<span class="temperature-days low-temperature">' + this.forecast_1_LowTemp + ' С° </span>' +
-								            '</li>' +
-								            '<li class="item-time-temperature">' +
-								                '<span class="icons-for-c icon-weather-' + this.forecast_2_code + '"></span>' +
-								                '<span class="day">' + this.forecast_2_Date + ' ' + '</span>' +
-								                '<span class="temperature-days high-temperature">' + this.forecast_2_HighTemp + ' С° </span>' +
-								                '<span class="temperature-days low-temperature">' + this.forecast_2_LowTemp + ' С° </span>' +
-								            '</li>' +
-								            '<li class="item-time-temperature">' +
-								                '<span class="icons-for-c icon-weather-' + this.forecast_3_code + '"></span>' +
-								                '<span class="day">' + this.forecast_3_Date + ' ' + '</span>' +
-								                '<span class="temperature-days high-temperature">' + this.forecast_3_HighTemp + ' С° </span>' +
-								                '<span class="temperature-days low-temperature">' + this.forecast_3_LowTemp + ' С° </span>' +
-								            '</li>' +
-								            '<li class="item-time-temperature">' +
-								                '<span class="icons-for-c icon-weather-' + this.forecast_4_code + '"></span>' +
-								                '<span class="day">' + this.forecast_4_Date + ' ' + '</span>' +
-								                '<span class="temperature-days high-temperature">' + this.forecast_4_HighTemp + ' С° </span>' +
-								                '<span class="temperature-days low-temperature">' + this.forecast_4_LowTemp + ' С° </span>' +
-								            '</li>' +
+				                          	self.getForecast(val.forecast, self);
 				                      '</ul>' +
 				                  '</div>' +
 				              '</div>' +
@@ -240,23 +73,36 @@
 				document.body.insertAdjacentHTML('afterBegin', html);
 			};
 
-			Weather.prototype.getDays = function(day) {
-				var days = {
-			        Mon: 'Понедiлок',
-			        Tue: 'Вiвторок',
-			        Wed: 'Середа',
-			        Thu: 'Четвер',
-			        Fri: 'П`ятниця',
-			        Sat: 'Субота',
-			        Sun: 'Недiля'
-			    };
+			Weather.prototype.getForecast = function(val, self) {
+
+				var getDay = function(day) {
+					var days = {
+				        Mon: 'Понедiлок',
+				        Tue: 'Вiвторок',
+				        Wed: 'Середа',
+				        Thu: 'Четвер',
+				        Fri: 'П`ятниця',
+				        Sat: 'Субота',
+				        Sun: 'Недiля'
+				    };
 
 			    return days[day];
-			};
+				};
 
-			// Weather.prototype.getDate = function() {
-			// 	this.forecast_1_Date = new Date().getDays();
-			// };
+				var htmlList = '';
+
+				for(var i =1; i < 5; i++) {
+					htmlList += '<li class="item-time-temperature">' +
+					                '<span class="icons-for-c icon-weather-' + val[i].code + '"></span>' +
+					                '<span class="day">' + getDay(val[i].day) + ' ' + '</span>' +
+					                '<span class="temperature-days high-temperature">' + val[i].high + ' С° </span>' +
+					                '<span class="temperature-days low-temperature">' + val[i].low + ' С° </span>' +
+					            '</li>';
+				};
+					
+				return htmlList;
+
+			};
 
 			Weather.prototype.weatherDescription = function(val) {
 				var description = {
