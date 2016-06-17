@@ -1,0 +1,224 @@
+@import '001func.styl'
+
+@font-face
+  font-family "HelveticaBold"
+  src url("../fonts/HelveticaBold/HelveticaBold.eot")
+  src url("../fonts/HelveticaBold/HelveticaBold.eot?#iefix")format("embedded-opentype"),
+  url("../fonts/HelveticaBold/HelveticaBold.woff") format("woff"),
+  url("../fonts/HelveticaBold/HelveticaBold.ttf") format("truetype")
+  font-style normal
+  font-weight normal
+
+
+*
+  box-sizing border-box
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video
+  background transparent
+  border 0
+  font-size 100%
+  margin 0
+  outline 0
+  padding 0
+  vertical-align baseline
+
+body 
+  line-height 1 
+  background backGrey
+  font-family Arial
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section
+  display block
+
+nav ul
+  list-style none
+
+blockquote, q
+  quotes none
+
+blockquote:before, blockquote:after,
+q:before, q:after
+  content ''
+  content none
+
+a
+  background transparent
+  font-size 12px
+  margin 0
+  padding 0
+  vertical-align baseline
+  text-decoration none
+
+mark
+    font-style italic
+    font-weight 700
+
+del
+  text-decoration line-through
+
+abbr[title], dfn[title]
+  border-bottom 1px dotted
+  cursor help
+
+table
+  border-collapse collapse
+  border-spacing 0
+
+/* change border colour to suit your needs */
+hr
+  border 0
+  border-top 1px solid #ccc
+  display block
+  height 1px
+  margin 1em 0
+  padding 0
+
+input, select 
+  vertical-align middle
+
+span 
+  font-size 12px
+
+/* Defaults */
+
+.uptolike-buttons
+  float right 
+  margin 20px 0
+
+.val-alert
+  position relative
+  z-index 999999
+  
+.val-alert p 
+  padding 20px 
+
+.val-flash-close
+  width 16px 
+  height 16px
+  background url(../images/sprite.png) -218px 22px
+  display inline-block
+  position absolute 
+  right 20px 
+  top 10px 
+
+.val-form-control
+  width 100%
+  height 32px
+  border 1px solid #DDDDDD
+  padding 0 10px
+  margin-bottom 15px
+  background #fff
+  color lightGreyText
+
+.val-all-outer
+	width 100%
+	display table
+	position relative
+	
+.button
+  font-size 12px
+  color #fff
+  text-transform uppercase
+  padding 10px 25px
+  border none
+  margin-left 7px
+  border-radius 2px
+  display inline-block  
+  cursor pointer
+
+.-gen-green
+	background generalGreenColor
+	
+.-gen-blue
+	background generalBlueColor
+
+.val-outer-news-block
+	width staticWidth
+	margin 0 auto
+	padding 40px 0 10px
+	display table
+
+.val-title-uppercase
+  font-family "HelveticaBold"
+  text-transform uppercase
+  font-size 24px
+  margin 0 0 25px 0 
+  display table
+  width 100%
+  
+.val-title-uppercase span
+  font-size 24px
+
+.val-title-uppercase-small
+  font-size 15px i
+  font-family "HelveticaBold"
+  text-transform uppercase
+  display table
+  width 100%
+  margin 0 0 10px 0
+  
+.val-title-uppercase-small a 
+  display inline-block
+  float right
+  text-transform none
+  color generalGreenColor
+  font-weight normal !important
+  font-size 12px
+  font-family Arial
+  padding 0px 0px 3px
+  margin 0 10px
+  border-bottom 1px solid rgba(21,148,139,.33)
+  &:hover 
+    border-bottom 1px solid transparent
+
+.val-title-uppercase-with-line
+  font-family "HelveticaBold"
+  text-transform uppercase
+  font-size 24px
+  margin 0 0 25px 0 
+  display table
+  width 100%
+  padding 12px 0 0 0
+  border-top 2px solid generalGreenColor
+
+.val-title-uppercase-with-line span 
+  font-size 24px
+
+.val-title-uppercase-with-line a 
+  display inline-block
+  float right
+  text-transform none
+  color generalGreenColor
+  font-weight normal !important
+  font-size 12px
+  font-family Arial
+  padding 4px 0px 3px
+  margin 0 10px
+  border-bottom 1px solid rgba(21,148,139,.33)
+  &:hover 
+    border-bottom 1px solid transparent
+
+.val-title-uppercase a 
+  display inline-block
+  float right
+  text-transform none
+  color generalGreenColor
+  font-weight normal !important
+  font-size 12px
+  font-family Arial
+  padding 4px 0px 3px
+  margin 0 10px
+  border-bottom 1px solid rgba(21,148,139,.33)
+  &:hover 
+    border-bottom 1px solid transparent
