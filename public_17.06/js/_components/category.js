@@ -1,7 +1,10 @@
-function Category() {
+function Category(categContainer) {
+    if(!categContainer) return;
+    
 	var self = this;
     this.id = 1;
     this.status = true;
+    this.fullWidthCategory = categContainer;
 
     window.addEventListener('scroll', this.ajaxRequest.bind(this));
 };
@@ -64,9 +67,8 @@ Category.prototype.categBlockTemplate = function(obj, lang, category) {
                         '<p class="val-description-news-category">' + self.slicingText(obj[i]['description_' + lang]) + '</p>' +
                     '</a>';
     };
-
-    var fullWidthCategory = document.querySelector('.val-full-width-category'),    
-        categoryBlock = '<div class="val-category-block">' + 
+   
+    var categoryBlock = '<div class="val-category-block">' + 
 						'<h2 class="val-title-uppercase-with-line">'+ category[0]['name_' + lang] + '</h2>' + 
 							'<div class="val-news-list-category">' + 
                                 '<a href="/site/news/' + obj[0].id + '"class="val-news-item-category val-category-image">' +
@@ -83,7 +85,7 @@ Category.prototype.categBlockTemplate = function(obj, lang, category) {
                             '</div>' +
 						'</div>';
 
-	fullWidthCategory.insertAdjacentHTML('beforeEnd', categoryBlock);
+	this.fullWidthCategory.insertAdjacentHTML('beforeEnd', categoryBlock);
 };
 
 Category.prototype.slicingText = function(text) {

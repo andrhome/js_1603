@@ -1,4 +1,7 @@
-function Weather() {
+function Weather(weatherBlock) {
+    if(!weatherBlock) return;
+    
+    this.outerForWeather = weatherBlock;
     var xhr = new XMLHttpRequest();
 
     var self = this;
@@ -29,8 +32,7 @@ function Weather() {
 };
 
 Weather.prototype.constructorNodes = function(val, self) {
-    var outerForWeather = document.querySelector('.outer-for-weather'),
-        html = '<div class="drop-weather-button">' +
+    var html = '<div class="drop-weather-button">' +
                   '<div class="outer-today-ico">' +
                       '<span class="icons-for-c-min icon-weather-min-' + val.condition.code + '"></span>' +
                       '<i class="today-weather">' + val.condition.temp + ' С°</i>' +
@@ -49,7 +51,7 @@ Weather.prototype.constructorNodes = function(val, self) {
                       '</h4>' +
                       // '<span class="temperature high-temperature">' + this.forecast_today_HighTemp + ' С° - </span>' +
                       // '<span class="temperature low-temperature">' + this.forecast_today_LowTemp + ' С°</span>' +
-                      '<p class="summary">' + val.condition.text + '</p>' +
+//                      '<p class="summary">' + val.condition.text + '</p>' +
                   '</div>' +
                       '</div>' +
                       '<div class="section-this-week">' +
@@ -61,7 +63,7 @@ Weather.prototype.constructorNodes = function(val, self) {
                   '</div>' +
               '</div>';
 
-    outerForWeather.insertAdjacentHTML('afterBegin', html);
+    self.outerForWeather.insertAdjacentHTML('afterBegin', html);
 };
 
 Weather.prototype.getForecast = function(val, self) {
