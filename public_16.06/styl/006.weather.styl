@@ -1,0 +1,299 @@
+@import '001func.styl'
+
+.drop-wether
+	border 1px solid #ddd
+	border-spacing 0
+	box-shadow -1px 4px 6px rgba(0, 0, 0, 0.09)
+	position absolute
+	margin-top 0px
+	display none
+	width 405px
+	z-index 9999
+	background backGrey
+	left -270px
+	top 25px
+
+.outer-for-weather
+	position relative
+	&:hover .drop-wether
+		display block
+
+.icons-for-c-min
+	width 21px
+	height 18px
+	display inline-block
+	vertical-align middle
+	margin-top -5px
+
+.today-weather
+	color lightGreyText
+	font-size 11px
+	cursor pointer
+	margin-left 5px
+	font-style normal
+
+.for-genwether
+	display table
+	width 100%
+	padding 0
+	margin 15px 0px
+
+.title-weather
+	float left
+	margin-left 10px
+	color #000 i
+
+.city-weather
+	float right
+	margin-right 10px
+	color #000 i
+	
+.section-today
+	border-top 1px solid #ddd
+	border-bottom 1px solid #ddd
+	padding 10px 10px 0
+	margin-bottom 10px
+	display table
+	width 100%
+
+
+.for-weather-icon
+	float left
+	
+.for-weather-icon .section-heading
+	padding-bottom 25px
+    
+h5.section-heading
+	font-size 14px
+
+.section-heading
+	text-transform uppercase
+	font-size 12px
+	color #000
+	padding 0
+
+.icons-for-c
+	width 35px
+	height 35px
+	display table
+	margin 0 auto 10px
+
+.weather-detail
+	float left
+	margin-top 20px
+	margin-left 20px
+	color lightGreyText
+
+.temperature
+	font-size 12px
+	color #444
+
+.summary
+	margin 3px 0 20px
+	font-size 15px
+	color #444
+
+.section-this-week
+	padding 0 10px 20px
+
+.item-list-temperature
+	display table
+	width 100%
+	padding 20px 0 0 i
+
+.item-time-temperature
+	width 25%
+	float left
+	list-style none
+	padding 0 5px
+	color lightGreyText
+
+.day
+	font-size 13px
+	width 100%
+	display block
+	text-align center
+	color #000 i
+
+.temperature-days
+	font-size 10px
+	color #444
+
+.weather-heading
+	padding 5px 0
+	font-weight normal
+
+.temp-now, .phrase
+	color #000 i
+
+.outer-today-ico
+	padding-bottom 10px
+	
+span.icon-weather-12,
+span.icon-weather-11,
+span.icon-weather-9 
+	background url(../images/sprite-no-repeat.svg) no-repeat -470px -12px
+
+
+span.icon-weather-min-12,
+span.icon-weather-min-11,
+span.icon-weather-min-9 
+	background url(../images/sprite-no-repeat.svg) no-repeat -437px -9px
+
+
+span.icon-weather-4,
+span.icon-weather-3,
+span.icon-weather-37,
+span.icon-weather-38,
+span.icon-weather-39 
+	background url(../images/sprite-no-repeat.svg) no-repeat -554px -12px
+
+
+span.icon-weather-min-4,
+span.icon-weather-min-3,
+span.icon-weather-min-37,
+span.icon-weather-min-38,
+span.icon-weather-min-39 
+	background url(../images/sprite-no-repeat.svg) no-repeat -520px -9px
+
+
+span.icon-weather-5,
+span.icon-weather-35,
+span.icon-weather-18,
+span.icon-weather-6,
+span.icon-weather-7 
+	background url(../images/sprite-no-repeat.svg) no-repeat -129px -71px
+
+
+span.icon-weather-min-5,
+span.icon-weather-min-35,
+span.icon-weather-min-18,
+span.icon-weather-min-6,
+span.icon-weather-min-7 
+	background url(../images/sprite-no-repeat.svg) no-repeat -92px -59px
+
+
+span.icon-weather-7,
+span.icon-weather-17,
+span.icon-weather-10 
+	background url(../images/sprite-no-repeat.svg) no-repeat -216px -62px
+
+
+span.icon-weather-min-7,
+span.icon-weather-min-17,
+span.icon-weather-min-10 
+	background url(../images/sprite-no-repeat.svg) no-repeat -181px -58px
+
+
+span.icon-weather-0,
+span.icon-weather-1,
+span.icon-weather-2,
+span.icon-weather-23,
+span.icon-weather-24 
+	background url(../images/sprite-no-repeat.svg) no-repeat -386px -60px
+
+
+span.icon-weather-min-0,
+span.icon-weather-min-1,
+span.icon-weather-min-2,
+span.icon-weather-min-23,
+span.icon-weather-min-24 
+	background url(../images/sprite-no-repeat.svg) no-repeat -352px -59px
+
+
+span.icon-weather-13,
+span.icon-weather-8,
+span.icon-weather-14,
+span.icon-weather-15,
+span.icon-weather-16,
+span.icon-weather-25,
+span.icon-weather-41,
+span.icon-weather-42,
+span.icon-weather-43 
+	background url(../images/sprite-no-repeat.svg) no-repeat -37px -69px
+
+
+span.icon-weather-min-13,
+span.icon-weather-min-8,
+span.icon-weather-min-14,
+span.icon-weather-min-15,
+span.icon-weather-min-16,
+span.icon-weather-min-25,
+span.icon-weather-min-41,
+span.icon-weather-min-42,
+span.icon-weather-min-43 
+	background url(../images/sprite-no-repeat.svg) no-repeat -1px -58px
+
+
+span.icon-weather-19,
+span.icon-weather-20,
+span.icon-weather-21,
+span.icon-weather-22 
+	background url(../images/sprite-no-repeat.svg) no-repeat -386px -12px
+
+
+span.icon-weather-min-19,
+span.icon-weather-min-20,
+span.icon-weather-min-21,
+span.icon-weather-min-22 
+	background url(../images/sprite-no-repeat.svg) no-repeat -353px -9px
+
+
+span.icon-weather-26,
+span.icon-weather-27 
+	background url(../images/sprite-no-repeat.svg) no-repeat -211px -12px
+
+
+span.icon-weather-min-26,
+span.icon-weather-min-29,
+span.icon-weather-min-27 
+	background url(../images/sprite-no-repeat.svg) no-repeat -177px -8px
+
+
+span.icon-weather-29,
+span.icon-weather-33,
+span.icon-weather-45,
+span.icon-weather-46,
+span.icon-weather-47 
+	background url(../images/sprite-no-repeat.svg) no-repeat -473px -62px
+
+
+span.icon-weather-min-33,
+span.icon-weather-min-45,
+span.icon-weather-min-46,
+span.icon-weather-min-47 
+	background url(../images/sprite-no-repeat.svg) no-repeat -438px -57px
+
+
+span.icon-weather-28,
+span.icon-weather-40 
+	background url(../images/sprite-no-repeat.svg) no-repeat -301px -10px
+
+
+span.icon-weather-min-28,
+span.icon-weather-min-40 
+	background url(../images/sprite-no-repeat.svg) no-repeat -266px -7px
+
+
+span.icon-weather-30,
+span.icon-weather-44 
+	background url(../images/sprite-no-repeat.svg) no-repeat -128px -10px
+
+
+span.icon-weather-min-30,
+span.icon-weather-min-44 
+	background url(../images/sprite-no-repeat.svg) no-repeat -93px -7px
+
+
+span.icon-weather-32,
+span.icon-weather-31,
+span.icon-weather-34,
+span.icon-weather-36 
+	background url(../images/sprite-no-repeat.svg) no-repeat -37px -10px
+
+
+span.icon-weather-min-32,
+span.icon-weather-min-31,
+span.icon-weather-min-34,
+span.icon-weather-min-36 
+	background url(../images/sprite-no-repeat.svg) no-repeat -2px -7px
