@@ -3,7 +3,7 @@ function Slider(slider) {
 
 	var self = this;
 
-	self.slider = document.querySelector('.val-list-slider');
+	self.slider = slider;
 	self.liSlides = self.slider.querySelectorAll('li');
 	self.pagination = document.querySelector('.val-display-controls');
 	self.count = self.liSlides.length;
